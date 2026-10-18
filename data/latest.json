@@ -1,5 +1,5 @@
 {
- "ts": "2026-10-18T21:43:42Z",
+ "ts": "2026-10-18T21:44:50Z",
  "ok": true,
  "http": {
   "getstatus": 200,
@@ -11,7 +11,7 @@
   "beerSet": null,
   "beerTemp": 4.69,
   "fridgeSet": 2.0,
-  "fridgeTemp": 4.32,
+  "fridgeTemp": 4.16,
   "roomTemp": 4.87,
   "scale": {
    "use": true,
@@ -31,7 +31,7 @@
      "doutPin": 25,
      "clockPin": 26,
      "calibrationLimitCounts": 2500,
-     "rawCounts": -703647,
+     "rawCounts": -703783,
      "state": 3,
      "present": true,
      "stable": true,
@@ -54,11 +54,11 @@
      "measureRecorded": "final",
      "retryPending": false,
      "kegChangePending": false,
-     "grossGrams": 17431.75195,
-     "temperatureC": 4.315999985,
-     "remainingLiters": 13.00173473,
+     "grossGrams": 17437.86914,
+     "temperatureC": 4.157999992,
+     "remainingLiters": 13.00779152,
      "capacityLiters": 19,
-     "percent": 68.43018341
+     "percent": 68.46205902
     },
     {
      "id": 1,
