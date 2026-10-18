@@ -75,29 +75,19 @@ for p in glob.glob(f"{DATA}/20??-??-??.jsonl"):
         if NOW.date() - datetime.strptime(os.path.basename(p)[:10], "%Y-%m-%d").date() > timedelta(days=30): os.remove(p)
     except ValueError: pass
 
-# ---- field extraction (BrewPiLess key aliases) ----
-def pick(d, *keys):
-    if not isinstance(d, dict): return (False, None)
-    for k in keys:
-        if k in d: return (True, d[k])
-    return (False, None)
-
-TEMP_KEYS = {"beer": ("beerTemp", "bt", "BeerTemp"), "fridge": ("fridgeTemp", "ft", "FridgeTemp"),
-             "room": ("roomTemp", "rt", "RoomTemp")}
-mode = pick(status, "mode", "md", "Mode")[1]
-mode_off = str(mode).lower() in ("o", "off", "none") if mode is not None else False
-_, bt = pick(status, "beerTemp", "bt", "BeerTemp")
-_, bs = pick(status, "beerSet", "bs", "BeerSet")
-heap = None
-for src in (fs, status):
-    h = pick(src, "heap", "freeheap", "freeHeap", "fheap", "HEAP")[1]
-    if isinstance(h, (int, float)): heap = h; break
+# ---- field extraction (actual BrewPiLess-fork /getstatus and /fs keys) ----
+g = status if isinstance(status, dict) else {}
+TEMP_KEYS = {"beer": "beerTemp", "fridge": "fridgeTemp", "room": "roomTemp"}
+mode = g.get("mode")
+mode_off = mode == "o"
+bt, bs = g.get("beerTemp"), g.get("beerSet")
+heap = fs.get("heap") if isinstance(fs, dict) and isinstance(fs.get("heap"), (int, float)) else None
 
 c = state.setdefault("consec", {})
 c["unreach"] = 0 if ok else c.get("unreach", 0) + 1
 dev = ok and isinstance(bt, (int, float)) and isinstance(bs, (int, float)) and abs(bt - bs) > 3
 c["dev"] = c.get("dev", 0) + 1 if dev else 0
-null_sensors = [n for n, ks in TEMP_KEYS.items() if pick(status, *ks)[0] and pick(status, *ks)[1] is None] if ok else []
+null_sensors = [n for n, k in TEMP_KEYS.items() if k in g and g[k] is None] if ok else []
 
 conds = {
     "unreach": (c["unreach"] >= 2, "Fermantasyon kontrolcüsüne ulaşılamıyor (2+ ardışık deneme)."),
@@ -134,4 +124,5 @@ for k, (active, msg) in conds.items():
         print(f"alert {k}: cleared")
 
 with open(f"{DATA}/alert_state.json", "w") as f: json.dump(state, f, indent=1)
-print(f"ok={ok} http={codes} beer={bt} set={bs} heap={heap}")
+kegs = [f"{x.get('name')}/{x.get('kegName')}:{x.get('remainingLiters')}L" for x in (g.get("scale") or {}).get("scales", [])]
+print(f"ok={ok} http={codes} mode={mode} beer={bt} set={bs} fridge={g.get('fridgeTemp')} heap={heap} kegs={kegs}")
