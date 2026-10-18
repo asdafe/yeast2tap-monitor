@@ -1,0 +1,84 @@
+{
+ "ts": "2026-10-18T21:43:42Z",
+ "ok": true,
+ "http": {
+  "getstatus": 200,
+  "fs": 200
+ },
+ "getstatus": {
+  "mode": "i",
+  "state": 4,
+  "beerSet": null,
+  "beerTemp": 4.69,
+  "fridgeSet": 2.0,
+  "fridgeTemp": 4.32,
+  "roomTemp": 4.87,
+  "scale": {
+   "use": true,
+   "retentionDays": 90,
+   "eventThresholdGrams": 100,
+   "maxPourMl": 1500,
+   "dailyMinute": 480,
+   "timeSynced": true,
+   "scales": [
+    {
+     "id": 0,
+     "configured": true,
+     "name": "SOL",
+     "kegName": "IPA",
+     "connected": true,
+     "calibrated": true,
+     "doutPin": 25,
+     "clockPin": 26,
+     "calibrationLimitCounts": 2500,
+     "rawCounts": -703647,
+     "state": 3,
+     "present": true,
+     "stable": true,
+     "calibrating": false,
+     "calCount": 0,
+     "calTarget": 30,
+     "calAction": null,
+     "calError": null,
+     "calErrorReason": null,
+     "calResult": null,
+     "measuring": false,
+     "measureCount": 0,
+     "measureTarget": 50,
+     "measureAction": null,
+     "measureResult": "ok",
+     "measureGrams": 17579.76758,
+     "measureHalfDiff": 36.59999847,
+     "measureLimit": 2500,
+     "measureTime": 1792299605,
+     "measureRecorded": "final",
+     "retryPending": false,
+     "kegChangePending": false,
+     "grossGrams": 17431.75195,
+     "temperatureC": 4.315999985,
+     "remainingLiters": 13.00173473,
+     "capacityLiters": 19,
+     "percent": 68.43018341
+    },
+    {
+     "id": 1,
+     "configured": true,
+     "name": "SA\u011e",
+     "kegName": "mexican",
+     "connected": true,
+     "calibrated": false
+    }
+   ]
+  }
+ },
+ "fs": {
+  "totalBytes": 589824,
+  "usedBytes": 61440,
+  "heap": 88880,
+  "minFreeHeap": 33504,
+  "largestFreeBlock": 73716,
+  "allocatedBlocks": 455,
+  "freeBlocks": 14,
+  "wsClients": 0
+ }
+}

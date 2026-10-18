@@ -1,0 +1,25 @@
+{
+ "alerts": {
+  "unreach": {
+   "active": false,
+   "last_sent": null
+  },
+  "sensor": {
+   "active": false,
+   "last_sent": null
+  },
+  "deviation": {
+   "active": false,
+   "last_sent": null
+  },
+  "heap": {
+   "active": false,
+   "last_sent": null
+  }
+ },
+ "consec": {
+  "unreach": 0,
+  "dev": 0
+ },
+ "last_tschedule": null
+}
